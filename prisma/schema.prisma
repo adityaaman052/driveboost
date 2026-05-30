@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  SALES_OFFICER
+}
+
+model User {
+  id           String   @id @default(cuid())
+  clerkUserId  String   @unique
+  name         String
+  email        String   @unique
+  role         Role
+  createdAt    DateTime @default(now())
+
+  salesEntries SalesEntry[]
+}
+
+model CarModel {
+  id          String   @id @default(cuid())
+  modelName   String
+  variant     String
+  baseSuffix  String
+  createdAt   DateTime @default(now())
+
+  salesEntries SalesEntry[]
+}
+
+model IncentiveSlab {
+  id               String   @id @default(cuid())
+  minRange         Int
+  maxRange         Int?
+  incentivePerCar  Int
+  createdAt        DateTime @default(now())
+}
+
+model SalesEntry {
+  id          String   @id @default(cuid())
+  quantity    Int
+  month       Int
+  year        Int
+  createdAt   DateTime @default(now())
+
+  userId      String
+  carModelId  String
+
+  user      User     @relation(fields: [userId], references: [id])
+  carModel  CarModel @relation(fields: [carModelId], references: [id])
+
+  @@index([userId])
+  @@index([carModelId])
+}
