@@ -28,6 +28,12 @@ export default function HomePage() {
           >
             Get Started
           </Link>
+          <Link
+            href="/guide"
+            className="rounded-xl border border-black px-6 py-3"
+          >
+            View User Guide
+          </Link>
         </div>
       </section>
 

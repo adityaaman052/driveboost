@@ -54,6 +54,5 @@ model SalesEntry {
   user      User     @relation(fields: [userId], references: [id])
   carModel  CarModel @relation(fields: [carModelId], references: [id])
 
-  @@index([userId])
-  @@index([carModelId])
+  @@unique([userId, carModelId, month, year])
 }

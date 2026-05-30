@@ -1,36 +1,319 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚗 DriveBoost — Toyota Sales Incentive Management System
 
-## Getting Started
+DriveBoost is a full-stack role-based sales incentive management platform built for managing Toyota vehicle sales, monthly incentive calculations, sales analytics, and administrative reporting.
 
-First, run the development server:
+The system enables Sales Officers to submit monthly sales data while allowing Admins to manage incentive slabs, car models, analytics, and reports through a secure dashboard.
+
+---
+
+# ✨ Features
+
+## 🔐 Authentication & Role Management
+
+* Clerk Authentication Integration
+* Secure Login & Signup
+* Role-Based Access Control (RBAC)
+* Dynamic role selection (Admin / Sales Officer)
+* Protected Admin & Sales routes
+
+---
+
+## 👨‍💼 Admin Features
+
+* Admin Dashboard
+* Sales Analytics Overview
+* Monthly Reports
+* Incentive Slab Management
+* Car Model Management
+* Performance Visualization Charts
+* Persistent Database Storage
+
+---
+
+## 👨‍🔧 Sales Officer Features
+
+* Monthly Sales Entry
+* Automatic Incentive Calculation
+* Incentive Slab Detection
+* Sales History Tracking
+* Month & Year Selection
+* Persistent Monthly Data
+* Editable Monthly Sales Records
+
+---
+
+## 📊 Analytics & Reporting
+
+* Total Cars Sold
+* Sales Entry Tracking
+* Incentive Estimation
+* Monthly Report Filtering
+* Sales Trend Visualization
+* Car-wise Sales Breakdown
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+* Next.js 16 (App Router)
+* React
+* TypeScript
+* Tailwind CSS
+* shadcn/ui
+* Recharts
+
+## Backend
+
+* Next.js Server Actions
+* Prisma ORM
+* PostgreSQL (Supabase)
+
+## Authentication
+
+* Clerk Authentication
+
+## Deployment
+
+* Vercel
+
+---
+
+# 🧠 System Workflow
+
+## Admin Workflow
+
+1. Login using Clerk Authentication
+2. Select Admin role
+3. Access Admin Dashboard
+4. Manage car models
+5. Configure incentive slabs
+6. Monitor analytics & reports
+7. Track sales performance
+
+---
+
+## Sales Officer Workflow
+
+1. Login using Clerk Authentication
+2. Select Sales Officer role
+3. Choose month & year
+4. Enter vehicle sales quantities
+5. View automatic incentive calculations
+6. Save monthly sales data
+7. Access previous sales history
+
+---
+
+# 📁 Project Structure
+
+```bash
+src/
+│
+├── app/
+│   ├── admin/
+│   ├── sales/
+│   ├── guide/
+│   ├── api/
+│   └── select-role/
+│
+├── components/
+│   ├── admin/
+│   ├── sales/
+│   └── ui/
+│
+├── lib/
+│   ├── prisma.ts
+│   ├── getCurrentUser.ts
+│   └── syncUser.ts
+│
+├── prisma/
+│   ├── schema.prisma
+│   └── seed.ts
+```
+
+---
+
+# 🗄️ Database Design
+
+## User
+
+Stores authenticated platform users.
+
+| Field       | Description             |
+| ----------- | ----------------------- |
+| id          | Unique user ID          |
+| clerkUserId | Clerk authentication ID |
+| name        | User name               |
+| email       | User email              |
+| role        | ADMIN / SALES_OFFICER   |
+
+---
+
+## CarModel
+
+Stores Toyota car models.
+
+| Field      | Description      |
+| ---------- | ---------------- |
+| modelName  | Car model        |
+| variant    | Variant name     |
+| baseSuffix | Vehicle category |
+
+---
+
+## IncentiveSlab
+
+Stores sales incentive rules.
+
+| Field           | Description         |
+| --------------- | ------------------- |
+| minRange        | Minimum sales range |
+| maxRange        | Maximum sales range |
+| incentivePerCar | Incentive amount    |
+
+---
+
+## SalesEntry
+
+Stores monthly sales records.
+
+| Field      | Description   |
+| ---------- | ------------- |
+| quantity   | Cars sold     |
+| month      | Sales month   |
+| year       | Sales year    |
+| userId     | Sales officer |
+| carModelId | Car model     |
+
+---
+
+# 🔄 Monthly Sales Persistence
+
+The system prevents duplicate monthly entries using:
+
+* Prisma compound unique constraints
+* Upsert-based database operations
+
+This ensures:
+
+* One record per user/car/month/year
+* Editable monthly sales
+* Persistent sales history
+
+---
+
+# 📈 Incentive Calculation Logic
+
+The platform automatically:
+
+1. Calculates total cars sold
+2. Detects matching incentive slab
+3. Calculates incentive per car
+4. Computes total incentive amount
+
+Example:
+
+| Cars Sold | Incentive |
+| --------- | --------- |
+| 1–3       | ₹1000/car |
+| 4–7       | ₹2500/car |
+| 8+        | ₹5000/car |
+
+---
+
+# 🚀 Installation & Setup
+
+## 1. Clone Repository
+
+```bash
+git clone <your-repository-url>
+```
+
+---
+
+## 2. Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## 3. Configure Environment Variables
+
+Create `.env` file:
+
+```env
+DATABASE_URL="YOUR_DATABASE_URL"
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="YOUR_CLERK_PUBLISHABLE_KEY"
+
+CLERK_SECRET_KEY="YOUR_CLERK_SECRET_KEY"
+```
+
+---
+
+## 4. Run Prisma Migration
+
+```bash
+npx prisma migrate dev
+```
+
+---
+
+## 5. Seed Initial Data
+
+```bash
+npx tsx prisma/seed.ts
+```
+
+---
+
+## 6. Start Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# 🌐 Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project is deployed using:
 
-## Learn More
+* Vercel
+* Supabase PostgreSQL
+* Clerk Authentication
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 📖 User Guide
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+A dedicated in-app User Guide page is included to help:
 
-## Deploy on Vercel
+* Admins understand dashboard workflows
+* Sales Officers manage monthly sales
+* Evaluators quickly understand system usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 🎯 Key Highlights
+
+* Full-stack architecture
+* Real authentication system
+* Persistent monthly sales tracking
+* Secure role-based access
+* Relational database design
+* Scalable backend structure
+* Professional dashboard UI
+* Real-world business workflow implementation
+
+---
+
+# 👨‍💻 Author
+
+Developed as a full-stack sales incentive management platform using modern web technologies.
+
+Built with ❤️ using Next.js, Prisma, Clerk, PostgreSQL, and Tailwind CSS.

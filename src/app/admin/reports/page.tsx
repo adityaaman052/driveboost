@@ -107,7 +107,7 @@ export default async function ReportsPage({
                 className="border-b"
               >
                 <td className="p-3">
-                  {report.user.name}
+                  {report.user.name || "Unknown User"}
                 </td>
 
                 <td className="p-3">

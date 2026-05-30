@@ -4,40 +4,22 @@ import { getCurrentUser } from "@/lib/getCurrentUser";
 
 import {
   LayoutDashboard,
-  Car,
-  IndianRupee,
-  BarChart3,
 } from "lucide-react";
 
 const links = [
   {
-    label: "Dashboard",
-    href: "/admin",
+    label: "Sales Dashboard",
+    href: "/sales",
     icon: LayoutDashboard,
-  },
-  {
-    label: "Cars",
-    href: "/admin/cars",
-    icon: Car,
-  },
-  {
-    label: "Slabs",
-    href: "/admin/slabs",
-    icon: IndianRupee,
-  },
-  {
-    label: "Reports",
-    href: "/admin/reports",
-    icon: BarChart3,
   },
 ];
 
-export default async function AdminSidebar() {
+export default async function SalesSidebar() {
   const user = await getCurrentUser();
 
   return (
     <div className="hidden md:flex min-h-screen w-64 flex-col border-r bg-linear-to-b from-white to-gray-100 p-5 shadow-lg">
-      
+
       <h1 className="mb-10 text-2xl font-bold">
         DriveBoost
       </h1>
@@ -59,7 +41,6 @@ export default async function AdminSidebar() {
         })}
       </div>
 
-      {/* Bottom User Section */}
       <div className="mt-auto border-t pt-5">
         <div className="mb-4">
           <p className="font-semibold">
@@ -71,7 +52,7 @@ export default async function AdminSidebar() {
           </p>
         </div>
 
-        <UserButton  />
+        <UserButton />
       </div>
     </div>
   );
