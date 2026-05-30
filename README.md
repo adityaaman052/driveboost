@@ -312,6 +312,37 @@ A dedicated in-app User Guide page is included to help:
 
 ---
 
+## 🚀 Live Demo
+
+🔗 **[https://driveboost.vercel.app](https://driveboost.vercel.app)**
+
+> Hosted on [Vercel](https://vercel.com) — zero-config deployments with automatic CI/CD on every push.
+
+### 🧪 Testing the App
+
+No pre-configured credentials needed — simply sign up and choose your role during registration.
+
+#### Steps to Get Started
+
+1. Go to [https://driveboost.vercel.app/sign-up](https://driveboost.vercel.app/sign-up)
+2. Create a new account with any email.
+3. During signup, **select your role** — either **Admin** or **Sales Officer**.
+4. Log in and explore the platform based on your chosen role.
+
+#### What you can do as an Admin
+- Add and manage Toyota car models
+- Configure incentive slabs based on sales ranges
+- View all sales reports submitted by Sales Officers
+- Analyze performance via charts and dashboard metrics
+
+#### What you can do as a Sales Officer
+- Select a month and year to log sales
+- Enter quantities sold for different car models
+- View auto-calculated incentives based on active slabs
+- Track your full sales history
+
+> ℹ️ Multiple users can sign up as Admin — there is no restriction on the number of admins.
+
 # 👨‍💻 Author
 
 Developed as a full-stack sales incentive management platform using modern web technologies.
